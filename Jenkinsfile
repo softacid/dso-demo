@@ -44,6 +44,7 @@ pipeline {
         }
       }
     }
+    stage('GenerateSBOM'){steps{container('maven'){sh'mvnorg.cyclonedx:cyclonedx-maven-plugin:makeAggregateBom'}}post{success{dependencyTrackPublisherprojectName:'sample-spring-app',projectVersion:'0.0.1',artifact:'target/bom.xml',autoCreateProjects:true,synchronous:truearchiveArtifactsallowEmptyArchive:true,artifacts:'target/bom.xml',fingerprint:true,onlyIfSuccessful:true}}}
     stage('OSSLicenseChecker'){
       steps {
         container('licensefinder') {
